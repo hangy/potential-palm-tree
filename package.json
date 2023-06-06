@@ -1,11 +1,11 @@
 {
-  "name": "template.publish.github-action",
-  "version": "1.0.0",
+  "name": "potential-palm-tree",
+  "version": "0.0.1",
   "main": "index.js",
-  "repository": "https://github.com/dendronhq/template.publish.github-action.git",
-  "author": "Kevin <kevin@dendron.so>",
+  "repository": "https://github.com/hangy/potential-palm-tree.git",
+  "author": "hangy <hangy@hangy.de>",
   "license": "MIT",
   "dependencies": {
-    "@dendronhq/dendron-cli": "^0.106.0"
+    "@dendronhq/dendron-cli": "^0.122.0"
   }
 }
