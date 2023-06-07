@@ -106,7 +106,8 @@ publishing:
         description: Personal knowledge space
     github:
         enableEditLink: true
-        editLinkText: Edit this page on GitHub
+        editLinkText: Verbesserung? Her damit!
+        editRepository: https://github.com/hangy/potential-palm-tree.git
         editBranch: main
         editViewMode: tree
     enablePrettyLinks: true
