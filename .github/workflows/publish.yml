@@ -1,10 +1,22 @@
-name: Build Dendron Static Site
+name: Deploy Dendron with GitHub Pages
 
 on:
-  workflow_dispatch: # Enables on-demand/manual triggering
+  workflow_dispatch:
   push:
     branches:
     - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -48,11 +60,19 @@ jobs:
     - name: Export notes
       run: yarn dendron publish export --target github --yes
 
-    - name: Deploy site
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: pages
-        publish_dir: docs/
-        force_orphan: true
-        #cname: example.com
+        path: docs/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
